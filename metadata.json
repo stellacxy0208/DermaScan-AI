@@ -1,0 +1,5 @@
+{
+  "name": "DermaScan AI - Professional Skin Analysis",
+  "description": "Advanced clinical skin analysis visualization generating 6 distinct dermatological views (Pigmentation, Vascular, UV Damage, Porphyrins, Wrinkles, Pores) using Gemini Pro Vision.",
+  "requestFramePermissions": []
+}
