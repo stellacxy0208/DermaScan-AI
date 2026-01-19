@@ -28,58 +28,62 @@ export const generateSkinAnalysis = async (base64Image: string): Promise<string>
   const cleanBase64 = base64Image.replace(/^data:image\/(png|jpeg|jpg|webp);base64,/, '');
 
   const prompt = `
-    Act as a professional VISIA Skin Analysis System. 
+    Role: Professional VISIA Skin Analysis System (Top-tier Dermatology Imaging).
     Input: The attached face photo.
     Task: Generate a single high-resolution 2x3 grid image (2 columns x 3 rows) containing 6 specific clinical analysis views of this EXACT person.
     
-    CRITICAL: 
-    1. You MUST strictly preserve the facial features, identity, expression, and head angle of the input person. Do not create a new person.
-    2. The output must be a single cohesive image arranged in a 2x3 grid.
-    3. Apply the following clinical filters to the original face in this order:
+    CRITICAL PROTOCOLS:
+    1. IDENTITY & EXPRESSION PRESERVATION: You MUST strictly preserve the facial features, identity, **EXACT FACIAL EXPRESSION**, and head angle of the input person. Do not morph the face or change the mood/demeanor.
+    2. Grid Layout: Output a single image with a 2x3 grid layout.
+    3. Composition: In EACH grid cell, Zoom out slightly to ensure the FULL FACE is visible from the top of the forehead to the chin. Do not crop the chin or forehead.
+    4. Background: The background behind the face must be BLURRED (Bokeh effect) to isolate the clinical subject.
+    5. Clinical Accuracy: Apply the following dermatological filters to the original face in this specific order:
 
-    [Row 1, Column 1] Brown Spots / Pigmentation
-    - Tone: Brown/Sepia Base.
-    - Texture: Rough, high graininess/noise texture.
-    - Negative Feature Inversion: Hair (eyebrows, eyelashes, hairline) must appear as GLOWING, HIGH-BRIGHTNESS MILKY WHITE or PALE YELLOW.
-    - Exception: LIPS must NOT glow. They should remain dark/natural sepia tone.
-    - Pigmentation Visualization: Facial skin covered with HIGH-CONTRAST deep brown to black irregular spots showing deep epidermal pigmentation.
+    [Row 1, Column 1] Brown Spots (Pigmentation)
+    - Technique: Negative Cross-Polarized RBX (Inverted).
+    - Appearance: **Sepia-Brown Negative Film** (Brownish-Sepia Base).
+    - Texture: **High Noise / Grainy Film Texture**.
+    - Lighting: **COMPLETELY MATTE**. No skin reflection, no shine, no gloss.
+    - Key Feature: Eyebrows, eyelashes, hairline, and facial hair MUST appear GLOWING BRIGHT WHITE (Negative effect).
+    - Visualization: Deep epidermal pigmentation (melanin), freckles, and age spots appear as DISTINCT DARK BROWN or BLACK spots against the sepia negative background.
 
-    [Row 1, Column 2] Red Areas / Vascular
-    - Tone: Clinical Vascular Map (Pale Pink/White base).
-    - Skin Base: Pale pink to almost white.
-    - Anomalies: Deep red patterns showing inflammation and capillaries.
-    - Highlights: Replace natural reflections with DEEP RED SHADOWS.
-    - Features: Hair, eyebrows, eyelashes, and pupil/iris MUST glow bright white.
+    [Row 1, Column 2] Red Areas (Vascular)
+    - Technique: Hemoglobin Map.
+    - Appearance: Pale pink/clinical white base.
+    - Visualization: Capillaries, inflammation, and spider veins appear as DEEP RED patterns.
+    - Negative Feature: Hair, eyebrows, and eyes must glow BRIGHT WHITE.
 
-    [Row 2, Column 1] UV Spots / Deep Damage
-    - Tone: Monochrome UV Photography.
-    - Skin Base: Deep dark/black (absorbing UV light).
-    - Visualization: Damaged spots appear as distinct BRIGHT WHITE "stars" or speckles against black skin (Negative Film effect).
-    - Constraint: No neon outlines. Spots look like white pigment on black surface.
-    - Features: Hair, eyebrows, eyelashes, hairline, and lips MUST remain DARK/BLACK.
+    [Row 2, Column 1] UV Spots (Deep Sun Damage)
+    - Technique: UV Fluorescence Photography (365nm).
+    - Appearance: **EXTREME HIGH CONTRAST Monochromatic Black & White**.
+    - Skin Tone: Healthy skin areas must appear **DEEP PITCH BLACK** (Total Light Absorption).
+    - Feature Preservation: Hair, eyebrows, and eyelashes must appear BLACK/DARK (Natural). DO NOT use negative film effect on hair for this view.
+    - Visualization: **"White Stars" Effect**: Subcutaneous UV damage and sun spots must appear as **INTENSE STARK WHITE or LIGHT GRAY SPOTS**, densely scattered like bright stars in a dark night sky (像夜空中的星星一样密集散布在深黑色皮肤上).
+    - Exclusions: **DO NOT confuse natural skin highlights (gloss/shine) with UV spots**. Highlights/Reflections must remain black/dark. Only pigment damage glows white.
+    - Effect: **Maximum Contrast**. Absolute Black healthy skin vs. Stark White damaged spots.
 
-    [Row 2, Column 2] Wood's Light / Porphyrins
-    - Tone: Dark Blue/Purple (UV Light Room).
-    - Effect: Skin looks dark blue/violet.
-    - Skin: Fluorescent pink or orange glowing dots in pores (nose, chin, forehead).
+    [Row 2, Column 2] Wood's Light (Bacteria/Oil)
+    - Technique: UV Blue Light Room.
+    - Appearance: Deep Blue/Violet "Avatar" skin tone.
+    - Visualization: Porphyrins (bacterial excretions) and sebum in pores must fluoresce as **BRIGHT, GLOWING PINK or ORANGE DOTS with a HALO/BLOOM effect**.
+    - Focus Areas: **Strictly target areas with high oil secretion**: Nose wings, Forehead (T-Zone), and Cheeks with enlarged pores.
+    - Constraint: Only these oily areas should glow with the halo effect. The rest of the face remains deep blue/violet.
 
-    [Row 3, Column 1] Polarized Wrinkles
-    - Technique: Cross-polarized photography (matte finish, no surface reflection).
-    - Subject State: Eyes closed.
-    - Focus: Crow's feet, forehead lines, mouth corners.
-    - Analysis Overlay: Superimpose a network of fine GREEN lines precisely tracing and tracking every detected wrinkle direction.
-    - Region of Interest: Draw a CYAN/TEAL contour line outlining specific analysis areas (e.g. around eyes or forehead).
-    - Style: High clinical accuracy.
+    [Row 3, Column 1] Wrinkles (Texture Topology)
+    - Technique: Cross-Polarized (No Glare/Oil).
+    - Visual Style: Natural skin tone (NOT grayscale). Completely matte finish, zero surface reflection.
+    - AI Overlay: Superimpose a precise network of fine BRIGHT GREEN lines tracing every wrinkle and fine line.
+    - Focus Areas: Crow's feet, Forehead lines, and Nasolabial folds.
+    - CONSTRAINT: **TRUE ANALYSIS ONLY**. Strictly follow the ORIGINAL lines and expression of the person. **DO NOT ADD FAKE WRINKLES**. Only trace what is visible in the source image.
 
-    [Row 3, Column 2] Polarized Pores
-    - Technique: Cross-polarized photography (eliminates oil shine).
-    - Subject State: Eyes closed.
-    - Focus: Nose, cheeks, chin (dense micropores).
-    - Analysis Overlay: Superimpose dense BRIGHT PURPLE or PINK small dots, each marking a detected enlarged pore.
-    - Region of Interest: Draw a CYAN/TEAL contour line outlining the nose and cheek analysis areas.
-    - Style: Scientific data visualization.
+    [Row 3, Column 2] Pores (Surface Analysis)
+    - Technique: High Definition Macro.
+    - Visual Style: Natural skin tone. Extreme clarity.
+    - AI Overlay: Superimpose dense BRIGHT PURPLE small dots marking enlarged pores.
+    - Focus Areas: Heavy concentration on Nose wings, T-Zone, and Cheeks.
+    - CONSTRAINT: **TRUE DETECTION ONLY**. Only overlay dots on areas where the system actually detects **enlarged** pores. Do not mark normal smooth skin.
 
-    Output format: A single image containing the 2x3 grid. No text overlays or borders between grid cells.
+    Output format: A single image file containing the 2x3 grid. No text labels inside the image.
   `;
 
   try {
@@ -97,7 +101,10 @@ export const generateSkinAnalysis = async (base64Image: string): Promise<string>
         ]
       },
       config: {
-        // We want a high fidelity image
+        imageConfig: {
+          aspectRatio: "9:16",
+          imageSize: "1K"
+        }
       }
     });
 

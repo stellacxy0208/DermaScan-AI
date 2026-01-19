@@ -186,7 +186,7 @@ function App() {
                       <div>
                         <h4 className="text-sm font-semibold text-teal-900">Ready for Analysis</h4>
                         <p className="text-xs text-teal-700 mt-1">
-                           System will generate 4 clinical views: Pigmentation, Vascular, UV Damage, and Porphyrins.
+                           System will generate 6 distinct clinical views including Wrinkles and Pore analysis.
                         </p>
                       </div>
                    </div>

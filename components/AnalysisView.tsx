@@ -92,8 +92,8 @@ export const AnalysisView: React.FC<AnalysisViewProps> = ({ mode, result, onRese
           </div>
         </div>
 
-        {/* Main Image Grid Display - 2x3 Aspect Ratio */}
-        <div className="relative w-full bg-slate-900 group cursor-crosshair overflow-hidden aspect-[2/3]">
+        {/* Main Image Grid Display - 9x16 Aspect Ratio to match generation */}
+        <div className="relative w-full bg-slate-900 group cursor-crosshair overflow-hidden aspect-[9/16]">
            <img 
              src={result.imageUrl} 
              alt="Skin Analysis Grid" 
