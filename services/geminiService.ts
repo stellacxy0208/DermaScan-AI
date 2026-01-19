@@ -72,9 +72,9 @@ export const generateSkinAnalysis = async (base64Image: string): Promise<string>
     [Row 3, Column 1] Wrinkles (Texture Topology)
     - Technique: Cross-Polarized (No Glare/Oil).
     - Visual Style: Natural skin tone (NOT grayscale). Completely matte finish, zero surface reflection.
-    - AI Overlay: Superimpose a precise network of fine BRIGHT GREEN lines tracing every wrinkle and fine line.
+    - AI Overlay: Superimpose BRIGHT GREEN lines ONLY on deep wrinkles.
     - Focus Areas: Crow's feet, Forehead lines, and Nasolabial folds.
-    - CONSTRAINT: **TRUE ANALYSIS ONLY**. Strictly follow the ORIGINAL lines and expression of the person. **DO NOT ADD FAKE WRINKLES**. Only trace what is visible in the source image.
+    - CONSTRAINT: **DEEP LINES ONLY**. **Do NOT add excessive fine lines**. **ONLY outline DEEP, VISIBLE wrinkles and furrows**. If the skin is relatively smooth, leave it clear. Precision over quantity. Do not clutter the face.
 
     [Row 3, Column 2] Pores (Surface Analysis)
     - Technique: High Definition Macro.
